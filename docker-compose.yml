@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - discovery.type=single-node
+      - xpack.security.http.ssl.enabled=false
+      - xpack.license.self_generated.type=trial
+      - ES_JAVA_OPTS=-Xms750m -Xmx750m
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic-net
+
+networks:
+  elastic-net:
+    driver: bridge
